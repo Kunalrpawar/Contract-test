@@ -12,13 +12,23 @@ import logging
 logger = logging.getLogger(__name__)
 
 # Create database engine
-engine = create_engine(
-    settings.database_url,
-    echo=(settings.environment == "development"),
-    pool_pre_ping=True,
-    pool_size=20,
-    max_overflow=40
-)
+if settings.use_sqlite:
+    # SQLite configuration (no connection pooling needed)
+    sqlite_url = "sqlite:///./contractiq.db"
+    engine = create_engine(
+        sqlite_url,
+        echo=(settings.environment == "development"),
+        connect_args={"check_same_thread": False}
+    )
+else:
+    # PostgreSQL configuration with connection pooling
+    engine = create_engine(
+        settings.database_url,
+        echo=(settings.environment == "development"),
+        pool_pre_ping=True,
+        pool_size=20,
+        max_overflow=40
+    )
 
 # Create session factory
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)

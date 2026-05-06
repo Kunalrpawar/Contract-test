@@ -88,6 +88,3 @@ class ComparisonResponse(BaseModel):
     contract_2_id: int
     differences: Dict[str, Any]
     similarity_score: Optional[float] = None
-
-
-class ContractDetailResponse.model_rebuild()

@@ -11,7 +11,8 @@ class Settings(BaseSettings):
     """Application Settings - loads from .env file"""
     
     # Database
-    database_url: str = "postgresql://contractiq:contractiq@localhost:5432/contractiq_db"
+    database_url: str = "sqlite:///./contractiq.db"  # SQLite for local development
+    use_sqlite: bool = True  # Use SQLite by default
     
     # Gemini API
     gemini_api_key: str = ""

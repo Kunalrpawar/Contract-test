@@ -1,6 +1,6 @@
 """
-Simple HTML Frontend for ContractIQ
-Provides basic UI for upload and analysis
+Modern HTML Frontend for ContractIQ
+Professional UI with modern design and no external dependencies
 """
 
 HTML_CONTENT = """
@@ -17,101 +17,153 @@ HTML_CONTENT = """
             box-sizing: border-box;
         }
         
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --info: #3b82f6;
+            --dark: #1f2937;
+            --gray: #6b7280;
+            --light: #f9fafb;
+            --border: #e5e7eb;
+        }
+        
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
             padding: 20px;
+            color: var(--dark);
         }
         
         .container {
-            max-width: 1200px;
+            max-width: 1400px;
             margin: 0 auto;
         }
         
+        /* Header */
         header {
             background: white;
-            padding: 30px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            border-radius: 16px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            border-bottom: 4px solid var(--primary);
+            text-align: center;
         }
         
         h1 {
-            color: #667eea;
-            margin-bottom: 10px;
+            font-size: 36px;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
         }
         
         .subtitle {
-            color: #666;
-            font-size: 14px;
+            color: var(--gray);
+            font-size: 16px;
+            font-weight: 500;
         }
         
+        /* Main Content */
         .main-content {
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 30px;
-            margin-bottom: 30px;
+            margin-bottom: 40px;
         }
         
         .card {
             background: white;
-            border-radius: 10px;
+            border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 1px solid var(--border);
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
         }
         
         .card h2 {
-            color: #667eea;
-            margin-bottom: 20px;
-            font-size: 20px;
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
         
+        .card h2 span {
+            font-size: 28px;
+        }
+        
+        /* Form Styles */
         .form-group {
             margin-bottom: 20px;
         }
         
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #333;
-            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--dark);
+            font-weight: 600;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         input[type="file"],
         input[type="text"],
         select {
             width: 100%;
-            padding: 12px;
-            border: 2px solid #e0e0e0;
-            border-radius: 5px;
+            padding: 14px 16px;
+            border: 2px solid var(--border);
+            border-radius: 10px;
             font-size: 14px;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            background: var(--light);
+            font-family: inherit;
         }
         
         input[type="file"]:focus,
         input[type="text"]:focus,
         select:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--primary);
+            background: white;
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
         
+        /* Button Styles */
         button {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: white;
-            padding: 12px 30px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 600;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
             width: 100%;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(99, 102, 241, 0.3);
         }
         
         button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            box-shadow: 0 8px 25px rgba(99, 102, 241, 0.4);
         }
         
         button:active {
@@ -121,83 +173,112 @@ HTML_CONTENT = """
         .button-group {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 10px;
+            gap: 15px;
         }
         
         .button-group button {
             width: 100%;
         }
         
+        /* Results Section */
         .results {
             background: white;
-            border-radius: 10px;
+            border-radius: 16px;
             padding: 30px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             display: none;
+            border-top: 4px solid var(--primary);
         }
         
         .results.show {
             display: block;
+            animation: slideUp 0.3s ease;
         }
         
-        .results h2 {
-            color: #667eea;
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .results h3 {
+            font-size: 20px;
+            color: var(--dark);
             margin-bottom: 20px;
+            font-weight: 700;
         }
         
+        /* Result Items */
         .result-item {
-            background: #f9f9f9;
-            padding: 15px;
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+            padding: 18px;
             margin-bottom: 15px;
-            border-left: 4px solid #667eea;
-            border-radius: 3px;
+            border-left: 5px solid var(--primary);
+            border-radius: 10px;
+            transition: all 0.3s ease;
+        }
+        
+        .result-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
         }
         
         .result-item strong {
-            color: #333;
-            display: block;
-            margin-bottom: 5px;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+            font-size: 15px;
         }
         
         .result-item p {
-            color: #666;
+            color: var(--gray);
             font-size: 14px;
-            line-height: 1.5;
+            line-height: 1.6;
         }
         
+        /* Status Badges */
         .status {
             display: inline-block;
-            padding: 5px 10px;
-            border-radius: 3px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-left: 10px;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
         }
         
         .status.success {
-            background: #d4edda;
-            color: #155724;
+            background: rgba(16, 185, 129, 0.15);
+            color: var(--success);
         }
         
         .status.error {
-            background: #f8d7da;
-            color: #721c24;
+            background: rgba(239, 68, 68, 0.15);
+            color: var(--danger);
         }
         
         .status.warning {
-            background: #fff3cd;
-            color: #856404;
+            background: rgba(245, 158, 11, 0.15);
+            color: var(--warning);
         }
         
         .status.info {
-            background: #d1ecf1;
-            color: #0c5460;
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--info);
         }
         
+        /* Loading Spinner */
         .loading {
             display: none;
             text-align: center;
-            padding: 20px;
+            padding: 30px;
         }
         
         .loading.show {
@@ -205,11 +286,11 @@ HTML_CONTENT = """
         }
         
         .spinner {
-            border: 4px solid #f3f3f3;
-            border-top: 4px solid #667eea;
+            border: 4px solid rgba(99, 102, 241, 0.15);
+            border-top: 4px solid var(--primary);
             border-radius: 50%;
-            width: 40px;
-            height: 40px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             margin: 0 auto;
         }
@@ -219,31 +300,53 @@ HTML_CONTENT = """
             100% { transform: rotate(360deg); }
         }
         
+        .loading p {
+            margin-top: 15px;
+            color: var(--gray);
+            font-weight: 500;
+        }
+        
+        /* Error Message */
         .error-message {
-            background: #f8d7da;
-            color: #721c24;
-            padding: 15px;
-            border-radius: 5px;
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--danger);
+            padding: 16px;
+            border-radius: 10px;
             margin-bottom: 20px;
             display: none;
+            border-left: 4px solid var(--danger);
+            font-weight: 500;
         }
         
         .error-message.show {
             display: block;
+            animation: slideUp 0.3s ease;
         }
         
+        /* Contracts List */
         .contracts-list {
-            margin-top: 30px;
+            margin-top: 40px;
+        }
+        
+        .contracts-list h2 {
+            margin-bottom: 20px;
         }
         
         .contract-item {
-            background: #f9f9f9;
-            padding: 15px;
-            margin-bottom: 10px;
-            border-radius: 5px;
+            background: linear-gradient(135deg, var(--light) 0%, #ffffff 100%);
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+        
+        .contract-item:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
         
         .contract-info {
@@ -251,14 +354,16 @@ HTML_CONTENT = """
         }
         
         .contract-info strong {
-            color: #333;
-            display: block;
+            color: var(--dark);
+            font-size: 16px;
+            font-weight: 700;
         }
         
         .contract-info small {
-            color: #999;
+            color: var(--gray);
             display: block;
-            margin-top: 5px;
+            margin-top: 8px;
+            font-size: 13px;
         }
         
         .contract-actions {
@@ -268,59 +373,106 @@ HTML_CONTENT = """
         
         .contract-actions button {
             width: auto;
-            padding: 8px 15px;
-            font-size: 14px;
+            padding: 10px 20px;
+            font-size: 12px;
+            background: linear-gradient(135deg, var(--danger) 0%, #dc2626 100%);
         }
         
+        .contract-actions button:hover {
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
+        }
+        
+        /* Footer */
         footer {
             text-align: center;
             color: white;
-            padding: 20px;
+            padding: 30px 20px;
             font-size: 14px;
+            margin-top: 40px;
         }
         
+        footer a {
+            color: white;
+            text-decoration: underline;
+            transition: opacity 0.3s;
+        }
+        
+        footer a:hover {
+            opacity: 0.8;
+        }
+        
+        /* Responsive */
         @media (max-width: 768px) {
+            header {
+                padding: 25px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
             .main-content {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
             
             .button-group {
                 grid-template-columns: 1fr;
+            }
+            
+            .card {
+                padding: 20px;
+            }
+            
+            .contract-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+            
+            .contract-actions {
+                width: 100%;
+            }
+            
+            .contract-actions button {
+                width: 100%;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Header -->
         <header>
-            <h1>🤖 ContractIQ</h1>
+            <h1>ContractIQ 🤖</h1>
             <p class="subtitle">AI-Powered Contract Testing & Validation Platform</p>
         </header>
         
+        <!-- Main Content -->
         <div class="main-content">
             <!-- Upload Section -->
             <div class="card">
-                <h2>📄 Upload Contract</h2>
+                <h2><span>📄</span> Upload Contract</h2>
                 <form id="uploadForm">
                     <div class="form-group">
                         <label for="contractFile">Select PDF or DOCX file</label>
                         <input type="file" id="contractFile" name="file" accept=".pdf,.docx" required>
                     </div>
-                    <button type="submit">Upload Contract</button>
+                    <button type="submit">📤 Upload Contract</button>
                 </form>
             </div>
             
             <!-- Analysis Section -->
             <div class="card">
-                <h2>🔍 Analyze Contract</h2>
+                <h2><span>🔍</span> Analyze & Validate</h2>
                 <form id="analysisForm">
                     <div class="form-group">
                         <label for="contractId">Contract ID</label>
                         <input type="text" id="contractId" name="contractId" placeholder="Enter contract ID" required>
                     </div>
                     <div class="button-group">
-                        <button type="button" onclick="analyzeContract()">Analyze</button>
-                        <button type="button" onclick="validateContract()">Validate</button>
+                        <button type="button" onclick="analyzeContract()">🔬 Analyze</button>
+                        <button type="button" onclick="validateContract()">✅ Validate</button>
                     </div>
                 </form>
             </div>
@@ -328,23 +480,24 @@ HTML_CONTENT = """
         
         <!-- Contracts List -->
         <div class="card contracts-list" id="contractsList" style="display: none;">
-            <h2>📋 Uploaded Contracts</h2>
+            <h2><span>📋</span> Uploaded Contracts</h2>
             <div id="contractsContainer"></div>
         </div>
         
         <!-- Results Section -->
         <div class="card results" id="results">
-            <h2>📊 Analysis Results</h2>
+            <h2><span>📊</span> Analysis Results</h2>
             <div class="error-message" id="errorMessage"></div>
             <div class="loading" id="loading">
                 <div class="spinner"></div>
-                <p style="margin-top: 10px; color: #666;">Processing...</p>
+                <p>⏳ Processing your contract...</p>
             </div>
             <div id="resultsContainer"></div>
         </div>
         
+        <!-- Footer -->
         <footer>
-            <p>ContractIQ v1.0.0 | API Documentation: <a href="http://localhost:8000/docs" style="color: white; text-decoration: underline;">http://localhost:8000/docs</a></p>
+            <p>© ContractIQ v1.0.0 | <a href="http://localhost:8000/docs">📖 API Docs</a> | <a href="http://localhost:8000">🏠 Home</a></p>
         </footer>
     </div>
     
@@ -378,12 +531,12 @@ HTML_CONTENT = """
                 }
                 
                 const contract = await response.json();
-                showResults(`Contract uploaded successfully!`, {
-                    id: contract.id,
-                    name: contract.name,
-                    type: contract.file_type,
-                    size: `${(contract.file_size / 1024 / 1024).toFixed(2)} MB`,
-                    status: contract.text_extracted ? 'Text Extracted ✓' : 'Pending text extraction'
+                showResults(`✓ Contract uploaded successfully!`, {
+                    'Contract ID': contract.id,
+                    'Name': contract.name,
+                    'Type': contract.file_type.toUpperCase(),
+                    'Size': `${(contract.file_size / 1024 / 1024).toFixed(2)} MB`,
+                    'Status': contract.text_extracted ? '✓ Text Extracted' : '⏳ Pending'
                 });
                 
                 document.getElementById('contractId').value = contract.id;
@@ -467,11 +620,11 @@ HTML_CONTENT = """
                     html += `
                         <div class="contract-item">
                             <div class="contract-info">
-                                <strong>${contract.name}</strong>
-                                <small>ID: ${contract.id} | Type: ${contract.file_type} | Size: ${(contract.file_size / 1024).toFixed(2)} KB</small>
+                                <strong>📄 ${contract.name}</strong>
+                                <small>ID: ${contract.id} | Type: ${contract.file_type.toUpperCase()} | Size: ${(contract.file_size / 1024).toFixed(2)} KB</small>
                             </div>
                             <div class="contract-actions">
-                                <button onclick="deleteContract(${contract.id})">Delete</button>
+                                <button onclick="deleteContract(${contract.id})">🗑️ Delete</button>
                             </div>
                         </div>
                     `;
@@ -494,6 +647,7 @@ HTML_CONTENT = """
                     method: 'DELETE'
                 });
                 listContracts();
+                showResults('✓ Contract deleted', {'Status': 'Successfully removed'});
             } catch (error) {
                 showError(`Error: ${error.message}`);
             }
@@ -501,19 +655,19 @@ HTML_CONTENT = """
         
         // Display analysis results
         function displayAnalysisResults(data) {
-            let html = '<h3>📌 Extracted Clauses</h3>';
+            let html = '<h3>📦 Extracted Clauses</h3>';
             
             if (data.clauses && data.clauses.length > 0) {
                 data.clauses.forEach(clause => {
                     html += `
                         <div class="result-item">
-                            <strong>${clause.clause_type} <span class="status info">${clause.confidence_score}%</span></strong>
-                            <p>${clause.clause_text || 'N/A'}</p>
+                            <strong>📌 ${clause.clause_type} <span class="status info">${clause.confidence_score}% Confidence</span></strong>
+                            <p>${clause.clause_text || 'No content available'}</p>
                         </div>
                     `;
                 });
             } else {
-                html += '<p>No clauses extracted</p>';
+                html += '<p>ℹ️ No clauses extracted</p>';
             }
             
             hideLoading();
@@ -523,13 +677,18 @@ HTML_CONTENT = """
         
         // Display validation results
         function displayValidationResults(data) {
-            let html = '<h3>✅ Validation Results</h3>';
+            let html = '<h3>🛡️ Validation Results</h3>';
             
             if (data.summary) {
                 html += `
                     <div class="result-item">
-                        <strong>Summary</strong>
-                        <p>✓ Passed: ${data.summary.passed} | ✗ Errors: ${data.summary.errors} | ⚠ Warnings: ${data.summary.warnings} | ℹ Info: ${data.summary.info}</p>
+                        <strong>📈 Summary</strong>
+                        <p>
+                            <span class="status success">✓ ${data.summary.passed} Passed</span>
+                            <span class="status error">✗ ${data.summary.errors} Errors</span>
+                            <span class="status warning">⚠ ${data.summary.warnings} Warnings</span>
+                            <span class="status info">ℹ ${data.summary.info} Info</span>
+                        </p>
                     </div>
                 `;
             }
@@ -537,11 +696,12 @@ HTML_CONTENT = """
             if (data.results && data.results.length > 0) {
                 data.results.forEach(result => {
                     const statusClass = result.is_passed ? 'success' : result.severity === 'ERROR' ? 'error' : result.severity === 'WARNING' ? 'warning' : 'info';
-                    const statusText = result.is_passed ? '✓ PASS' : '✗ FAIL';
+                    const statusIcon = result.is_passed ? '✓' : '✗';
+                    const statusText = result.is_passed ? 'PASS' : 'FAIL';
                     
                     html += `
                         <div class="result-item">
-                            <strong>${result.rule_name} <span class="status ${statusClass}">${statusText}</span></strong>
+                            <strong>✓ ${result.rule_name} <span class="status ${statusClass}">${statusIcon} ${statusText}</span></strong>
                             <p>${result.message || result.rule_description}</p>
                         </div>
                     `;

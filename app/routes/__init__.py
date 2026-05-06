@@ -4,6 +4,7 @@ from .validation import router as validation_router
 from .comparison import router as comparison_router
 from .health import router as health_router
 from .frontend import router as frontend_router
+from .advanced_analysis import router as advanced_analysis_router
 
 __all__ = [
     "contracts_router",
@@ -11,5 +12,6 @@ __all__ = [
     "validation_router",
     "comparison_router",
     "health_router",
-    "frontend_router"
+    "frontend_router",
+    "advanced_analysis_router"
 ]

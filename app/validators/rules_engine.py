@@ -194,5 +194,5 @@ class ValidationRulesEngine:
     @staticmethod
     def _check_text_extracted(contract: Contract, clauses: List[ClauseExtraction]) -> tuple:
         """Check if contract text was successfully extracted"""
-        extracted = contract.text_extracted and contract.raw_text
+        extracted = bool(contract.text_extracted and contract.raw_text)
         return extracted, "Contract text " + ("extracted" if extracted else "NOT extracted")

@@ -15,7 +15,8 @@ from app.routes import (
     validation_router,
     comparison_router,
     health_router,
-    frontend_router
+    frontend_router,
+    advanced_analysis_router
 )
 
 logger = logging.getLogger(__name__)
@@ -58,6 +59,7 @@ app.include_router(contracts_router)
 app.include_router(analysis_router)
 app.include_router(validation_router)
 app.include_router(comparison_router)
+app.include_router(advanced_analysis_router)
 
 
 if __name__ == "__main__":

@@ -237,7 +237,7 @@ The validation engine checks:
 - **Termination** - How contract can be ended
 - **Confidentiality** - Data protection and NDAs
 - **Liability** - Liability limitations
-- **ForceMAjeure** - Unforeseen circumstances clause
+- **ForceMajeure** - Unforeseen circumstances clause
 - **Intellectual Property** - IP rights
 - **Warranty** - Warranties and representations
 - **Indemnification** - Indemnity clauses
