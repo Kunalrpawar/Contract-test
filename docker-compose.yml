@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  db:
+    image: postgres:15-alpine
+    container_name: contractiq-db
+    environment:
+      POSTGRES_USER: contractiq
+      POSTGRES_PASSWORD: contractiq
+      POSTGRES_DB: contractiq_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U contractiq"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - contractiq-network
+
+  # FastAPI Backend
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: contractiq-api
+    environment:
+      DATABASE_URL: postgresql://contractiq:contractiq@db:5432/contractiq_db
+      GEMINI_API_KEY: ${GEMINI_API_KEY:-}
+      SECRET_KEY: ${SECRET_KEY:-dev-secret-key-change-in-production}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      LOG_LEVEL: ${LOG_LEVEL:-INFO}
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    volumes:
+      - ./uploads:/app/uploads
+      - ./app:/app/app
+    networks:
+      - contractiq-network
+    command: python -m uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # Optional: pgAdmin for database management
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: contractiq-pgadmin
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@contractiq.local
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    networks:
+      - contractiq-network
+
+volumes:
+  postgres_data:
+
+networks:
+  contractiq-network:
+    driver: bridge

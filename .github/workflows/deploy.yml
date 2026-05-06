@@ -1,0 +1,36 @@
+name: Deploy to Production
+
+on:
+  push:
+    branches: [ main ]
+    tags: [ 'v*' ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Build and push Docker image
+      run: |
+        echo "Docker image deployment would happen here"
+        echo "Built image: contractiq:${{ github.sha }}"
+    
+    - name: Deploy to staging
+      run: |
+        echo "Deploying to staging environment..."
+        # Add deployment commands here
+    
+    - name: Run smoke tests
+      run: |
+        echo "Running smoke tests on deployed environment..."
+        # Add smoke test commands
+    
+    - name: Notify deployment
+      if: success()
+      run: echo "✅ Deployment successful"
+    
+    - name: Notify failure
+      if: failure()
+      run: echo "❌ Deployment failed"
